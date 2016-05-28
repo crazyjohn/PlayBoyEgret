@@ -6,6 +6,5 @@
         <e:Label id="titleDisplay" size="20" fontFamily="Tahoma" textColor="0xFFFFFF"
                  wordWrap="false" horizontalCenter="0" verticalCenter="0"/>
     </e:Group>
-    <e:Button id="closeButton" label="unlike" bottom="15" left="50"/>
-    <e:Button id="likeButton" label="like" bottom="15" left="190"/>
+   
 </e:Skin>

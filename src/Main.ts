@@ -123,6 +123,8 @@ class Main extends eui.UILayer {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
+    
+    private photos: eui.Image;
     /**
      * 创建场景界面
      * Create scene interface
@@ -135,14 +137,31 @@ class Main extends eui.UILayer {
         mainPanel.height = 460;
         mainPanel.title = "PlayBoy";
         // photos
-        var photos = new eui.Image();
-        photos.width = 250;
-        photos.height = 300;
-        photos.horizontalCenter = 0;
-        photos.verticalCenter = 0;
-        photos.source = "resource/photos/john1.jpg";
-        mainPanel.addChild(photos);
+        this.photos = new eui.Image();
+        this.photos.width = 250;
+        this.photos.height = 300;
+        this.photos.x = 35;
+        this.photos.y = 50;
+        
+        this.photos.source = "resource/photos/john1.jpg";
+        mainPanel.addChild(this.photos);
         this.addChild(mainPanel);
+        // unlike
+        var unLikeBtn = new eui.Button();
+        unLikeBtn.label = "unlike";
+        unLikeBtn.bottom = 15;
+        unLikeBtn.left = 50;
+        mainPanel.addChild(unLikeBtn);
+        // like
+        var likeBtn = new eui.Button();
+        likeBtn.label = "like";
+        likeBtn.bottom = 15;
+        likeBtn.left = 190;
+        mainPanel.addChild(likeBtn);
+        // like action
+        likeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onLikeClick, this);
+        // unlike action
+        unLikeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onUnLikeClick,this);
         
 //        var button = new eui.Button();
 //        button.label = "Click!";
@@ -152,6 +171,21 @@ class Main extends eui.UILayer {
 //        button.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
     }
 
+    private onLikeClick(e: egret.TouchEvent) {
+        // tween
+        var photoTween = egret.Tween.get(this.photos);
+        photoTween.to({ x: 900 , y: -900}, 200).to({x: 35, y: 50}, 500, egret.Ease.backInOut);
+        console.log("Like button clicked.");
+    }
+    
+    private onUnLikeClick(e: egret.TouchEvent) {
+        // tween
+        var photoTween = egret.Tween.get(this.photos);
+        photoTween.to({ x: -900,y: -900 },200).to({ x: 35,y: 50 },500,egret.Ease.backInOut);
+        console.log("UnLike button clicked.");
+    }
+    
+    
     private onButtonClick(e: egret.TouchEvent) {
         var panel = new eui.Panel();
         panel.title = "Title";
